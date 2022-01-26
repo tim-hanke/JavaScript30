@@ -10,6 +10,7 @@
         <div class="hand hour-hand"></div>
         <div class="hand min-hand"></div>
         <div class="hand second-hand"></div>
+        <div class="dot"></div>
       </div>
     </div>
 
@@ -54,14 +55,37 @@
 
       .hand {
         width: 50%;
-        height: 6px;
-        background: black;
         position: absolute;
-        top: 50%;
+        top: 49%;
         transform-origin: 100%;
         transform: rotate(90deg);
         transition: all 0.05s;
         transition-timing-function: cubic-bezier(0.38, 2.46, 0.51, 1);
+      }
+
+      .hour-hand {
+        height: 8px;
+        background: repeating-linear-gradient(270deg, black, transparent);
+      }
+
+      .min-hand {
+        height: 5px;
+        background: repeating-linear-gradient(270deg, black, transparent);
+      }
+
+      .second-hand {
+        height: 2.5px;
+        background: aquamarine;
+      }
+
+      .dot {
+        width: 0px;
+        border: 15px solid white;
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
       }
     </style>
 
