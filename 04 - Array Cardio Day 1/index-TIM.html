@@ -139,6 +139,13 @@
         "car",
         "truck",
       ];
+
+      const transportation = data.reduce((obj, method) => {
+        console.log(method);
+        obj[method] = obj[method] ? obj[method] + 1 : 1;
+        return obj;
+      }, {});
+      console.log(transportation);
     </script>
   </body>
 </html>
