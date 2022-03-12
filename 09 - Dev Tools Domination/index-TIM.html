@@ -1,46 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Console Tricks!</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Console Tricks!</title>
+  </head>
+  <body>
+    <p onClick="makeGreen()">×BREAK×DOWN×</p>
 
-  <p onClick="makeGreen()">×BREAK×DOWN×</p>
+    <script>
+      const dogs = [
+        { name: "Snickers", age: 2 },
+        { name: "hugo", age: 8 },
+      ];
 
-  <script>
-    const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
+      function makeGreen() {
+        const p = document.querySelector("p");
+        p.style.color = "#BADA55";
+        p.style.fontSize = "50px";
+      }
 
-    function makeGreen() {
-      const p = document.querySelector('p');
-      p.style.color = '#BADA55';
-      p.style.fontSize = '50px';
-    }
+      // Regular
+      console.log("Hello!");
 
-    // Regular
+      // Interpolated
+      // I had never heard of this, since I started with template literals
+      console.log("I am an %s string!", "interpolated");
 
-    // Interpolated
+      // Styled
+      // you can add CSS properties to console.log with %c at the start of a string
+      console.log(
+        "%c I am some styled text!",
+        "font-size: 30px; text-shadow: 2px 2px 0 lightsteelblue, 2px 2px 2px lightsteelblue"
+      );
 
-    // Styled
+      // warning!
+      // displays a warning icon in the console
+      console.warn("Don't do it!");
 
-    // warning!
+      // Error :|
+      // displays an error icon in the console
+      console.error("Damn it!");
 
-    // Error :|
+      // Info
+      // no longer shows an info icon in Chromium, looks the same as console.log
+      // it does show the icon in Firefox
+      console.info(
+        "According to some sources, crocodiles eat 3-4 people per year."
+      );
 
-    // Info
+      // Testing
+      // only logs the second argument if the first argument is not true
+      // this console.assert wil not display anything
+      console.assert(1 === 1, "One doesn't equal one anymore!");
+      // this console.assert will log "Nope! Not there!"
+      const p = document.querySelector("p");
+      console.assert(p.classList.contains("uhoh"), "Nope! Not there!");
 
-    // Testing
+      // clearing
+      // console.clear will clear the console (Haha, obviously)
+      // console.clear();
 
-    // clearing
+      // Viewing DOM Elements
+      // console.dir will show all properties and methods on an element
+      console.dir(p);
 
-    // Viewing DOM Elements
+      // Grouping together
+      // console.group links together several console statements in a collapsible group
+      // console.groupCollapsed does the same, but the group starts already collapsed
+      // console.groupEnd defines the end of the grouping
+      dogs.forEach((dog) => {
+        console.groupCollapsed(`${dog.name}`);
+        console.log(`This is ${dog.name}`);
+        console.log(`${dog.name} is ${dog.age} years old`);
+        console.log(`${dog.name} is ${dog.age * 7} dog years old`);
+        console.groupEnd(`${dog.name}`);
+      });
 
-    // Grouping together
+      // counting
+      // console.count keeps a count of how many times you have logged a specific message
+      // it logs the message plus the count
+      console.count("Tim");
+      console.count("Tim");
+      console.count("Tim");
+      console.count("Noble");
+      console.count("Tim");
+      console.count("Noble");
+      console.count("Noble");
+      console.count("Tim");
+      console.count("Noble");
+      console.count("Tim");
+      console.count("Tim");
 
-    // counting
-
-    // timing
-
-  </script>
-</body>
+      // timing
+      // console.time and console.timeEnd can time how long something takes
+      console.time("Fetching from github took");
+      fetch("https://api.github.com/users/tim-hanke")
+        .then((data) => data.json())
+        .then((data) => {
+          console.timeEnd("Fetching from github took");
+          console.table(data);
+        });
+    </script>
+  </body>
 </html>
