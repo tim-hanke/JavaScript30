@@ -8,5 +8,20 @@ const ranges = player.querySelectorAll(".player__slider");
 const skipButtons = player.querySelectorAll("[data-skip]");
 
 /* Build Our Functions */
+function togglePlay() {
+  if (video.paused) {
+    video.play();
+  } else {
+    video.pause();
+  }
+}
+
+function updatePlayButton() {
+  toggle.textContent = this.paused ? "►" : "❚ ❚";
+}
 
 /* Hook Up Event Listeners */
+video.addEventListener("click", togglePlay);
+video.addEventListener("play", updatePlayButton);
+video.addEventListener("pause", updatePlayButton);
+toggle.addEventListener("click", togglePlay);
