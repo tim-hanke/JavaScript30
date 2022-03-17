@@ -20,8 +20,14 @@ function updatePlayButton() {
   toggle.textContent = this.paused ? "►" : "❚ ❚";
 }
 
+function skip() {
+  console.log(`Skipping ${this.dataset.skip} seconds`);
+  video.currentTime += parseFloat(this.dataset.skip);
+}
+
 /* Hook Up Event Listeners */
 video.addEventListener("click", togglePlay);
 video.addEventListener("play", updatePlayButton);
 video.addEventListener("pause", updatePlayButton);
 toggle.addEventListener("click", togglePlay);
+skipButtons.forEach((button) => button.addEventListener("click", skip));
