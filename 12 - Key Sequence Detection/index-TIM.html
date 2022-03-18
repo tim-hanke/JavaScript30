@@ -1,12 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Key Detection</title>
-  <script type="text/javascript" src="https://www.cornify.com/js/cornify.js"></script>
-</head>
-<body>
-<script>
-</script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Key Detection</title>
+    <script
+      type="text/javascript"
+      src="https://www.cornify.com/js/cornify.js"
+    ></script>
+  </head>
+  <body>
+    <script>
+      let pressed = [];
+      const secretCode = "corn";
+      const superSecretCode = [
+        "ArrowUp",
+        "ArrowUp",
+        "ArrowDown",
+        "ArrowDown",
+        "ArrowLeft",
+        "ArrowRight",
+        "ArrowLeft",
+        "ArrowRight",
+        "a",
+        "b",
+      ];
+
+      window.addEventListener("keyup", (e) => {
+        pressed.push(e.key);
+        // trim the pressed array to length of KONAMI code,
+        // to keep it manageable
+        pressed.splice(
+          -superSecretCode.length - 1,
+          pressed.length - superSecretCode.length
+        );
+        // if the recent keystrokes include the secret code,
+        // then get one unicorn and clear the pressed array, so
+        // that this doesn't keep firing on the next 'keyup's
+        if (pressed.join("").includes(secretCode)) {
+          cornify_add();
+          pressed = [];
+        }
+        // if pressed contains the super secret KONAMI code, then
+        // go ahead and add 10 unicorns
+        if (pressed.join("").includes(superSecretCode.join(""))) {
+          cornify_add();
+          cornify_add();
+          cornify_add();
+          cornify_add();
+          cornify_add();
+          cornify_add();
+          cornify_add();
+          cornify_add();
+          cornify_add();
+          cornify_add();
+        }
+      });
+    </script>
+  </body>
 </html>
