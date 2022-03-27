@@ -28,7 +28,7 @@
       }
 
       h1 {
-        text-shadow: 10px 10px 0 rgba(0, 0, 0, 1);
+        /* text-shadow: 10px 10px 0 rgba(0, 0, 0, 1); */
         font-size: 100px;
       }
     </style>
@@ -39,7 +39,26 @@
 
       function shadow(e) {
         const { offsetWidth: width, offsetHeight: height } = hero;
-        console.log(width, height);
+        let { offsetX: x, offsetY: y } = e;
+        const walk = 65;
+
+        if (this !== e.target) {
+          x = x + e.target.offsetLeft;
+          y = y + e.target.offsetTop;
+        }
+
+        const xWalk = Math.round((x / width) * walk - walk / 2);
+        const yWalk = Math.round((y / height) * walk - walk / 2);
+
+        console.log(xWalk, yWalk);
+
+        text.style.textShadow = `
+        ${xWalk * -0.2}px ${yWalk * -0.2}px 1px rgba(247,99,12,0.7),
+        ${xWalk * -0.3}px ${yWalk * -0.3}px 3px rgba(247,99,12,0.6),
+        ${xWalk * -0.5}px ${yWalk * -0.5}px 5px rgba(252,225,0,0.5),
+        ${xWalk * -0.75}px ${yWalk * -0.75}px 10px rgba(252,225,0,0.3),
+        ${xWalk * -1}px ${yWalk * -1}px 20px rgba(252,225,0,0.25)
+        `;
       }
 
       hero.addEventListener("mousemove", shadow);
