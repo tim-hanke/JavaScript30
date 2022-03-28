@@ -61,6 +61,8 @@
       ];
 
       function stripArticles(string) {
+        // Wes did this with a regex one liner, but I think this
+        // functions the same way
         let stripped = string.toUpperCase().split(" ");
         if (
           stripped[0] === "A" ||
@@ -73,6 +75,9 @@
       }
 
       bands.sort((a, b) => {
+        // Per MDN article for sort, the compare function should return 0
+        // if the items are equal. With this sample data, it makes no
+        // difference because none of them are equal.
         if (stripArticles(a) < stripArticles(b)) {
           return -1;
         }
