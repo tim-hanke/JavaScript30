@@ -73,9 +73,18 @@
         .map((timeCode) => {
           const [min, sec] = timeCode.split(":").map(parseFloat);
           return min * 60 + sec;
-        });
-      // 6:23
-      console.log(seconds);
+        })
+        .reduce((total, vidSeconds) => total + vidSeconds);
+
+      let secondsLeft = seconds;
+      const hours = Math.floor(secondsLeft / 3600);
+      secondsLeft = secondsLeft % 3600;
+      const minutes = Math.floor(secondsLeft / 60);
+      secondsLeft = secondsLeft % 60;
+
+      console.log(
+        `Total video time: ${hours} hours ${minutes} minutes ${secondsLeft} seconds`
+      );
     </script>
   </body>
 </html>
