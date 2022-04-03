@@ -24,7 +24,9 @@
           .map((result) => result.transcript)
           .join("");
 
-        p.textContent = transcript;
+        const poopscript = transcript.replace(/poop|poo|shit|dump/gi, "💩");
+        p.textContent = poopscript;
+        // p.textContent = transcript;
         if (e.results[0].isFinal) {
           p = document.createElement("p");
           words.appendChild(p);
