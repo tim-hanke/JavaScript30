@@ -32,6 +32,7 @@ function paintToCanvas() {
     // pixels = redEffect(pixels);
     pixels = rgbSplit(pixels);
     ctx.globalAlpha = 0.5;
+    pixels = greenScreen(pixels);
     ctx.putImageData(pixels, 0, 0);
   }, 16);
 }
@@ -66,9 +67,38 @@ function redEffect(pixels) {
 function rgbSplit(pixels) {
   for (let i = 0; i < pixels.data.length; i += 4) {
     pixels.data[i + 100] = pixels.data[i + 0]; // RED
-    pixels.data[i - 360] = pixels.data[i + 1]; // GREEN
+    pixels.data[i - 90] = pixels.data[i + 1]; // GREEN
     pixels.data[i + 250] = pixels.data[i + 2]; // BLUE
   }
+  return pixels;
+}
+
+function greenScreen(pixels) {
+  const levels = {};
+
+  document.querySelectorAll(".rgb input").forEach((input) => {
+    levels[input.name] = input.value;
+  });
+
+  for (i = 0; i < pixels.data.length; i = i + 4) {
+    red = pixels.data[i + 0];
+    green = pixels.data[i + 1];
+    blue = pixels.data[i + 2];
+    alpha = pixels.data[i + 3];
+
+    if (
+      red >= levels.rmin &&
+      green >= levels.gmin &&
+      blue >= levels.bmin &&
+      red <= levels.rmax &&
+      green <= levels.gmax &&
+      blue <= levels.bmax
+    ) {
+      // take it out!
+      pixels.data[i + 3] = 0;
+    }
+  }
+
   return pixels;
 }
 
