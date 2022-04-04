@@ -24,8 +24,11 @@
           .map((result) => result.transcript)
           .join("");
 
-        const poopscript = transcript.replace(/poop|poo|shit|dump/gi, "💩");
+        const poopscript = transcript
+          .replace(/poop|poo|shit|dump/gi, "💩")
+          .replace(/baby/gi, "👶");
         p.textContent = poopscript;
+        console.log(poopscript);
         // p.textContent = transcript;
         if (e.results[0].isFinal) {
           p = document.createElement("p");
